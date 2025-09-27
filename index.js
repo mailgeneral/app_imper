@@ -41,6 +41,38 @@ const links = [
 
 // --- LÓGICA DE LA APLICACIÓN ---
 
+let deferredPrompt;
+
+/**
+ * Maneja el evento 'beforeinstallprompt' para mostrar nuestro propio botón de instalación.
+ */
+function setupInstallButton() {
+    const installButton = document.getElementById('install-button');
+    if (!installButton) return;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        // Previene que Chrome muestre el mini-infobar
+        e.preventDefault();
+        // Guarda el evento para que pueda ser disparado más tarde.
+        deferredPrompt = e;
+        // Muestra nuestro botón de instalación personalizado
+        installButton.style.display = 'block';
+
+        installButton.addEventListener('click', async () => {
+            // Oculta nuestro botón, ya que solo se puede usar una vez.
+            installButton.style.display = 'none';
+            // Muestra el diálogo de instalación
+            deferredPrompt.prompt();
+            // Espera a que el usuario responda
+            const { outcome } = await deferredPrompt.userChoice;
+            console.log(`El usuario respondió al diálogo: ${outcome}`);
+            // Limpiamos la variable, ya no la necesitamos
+            deferredPrompt = null;
+        });
+    });
+}
+
+
 /**
  * Renderiza el perfil del usuario en el encabezado.
  */
@@ -105,5 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
     renderProfile();
     renderLinks();
     registerServiceWorker();
+    setupInstallButton(); // <-- Añadimos la nueva función aquí
 });
 })();
