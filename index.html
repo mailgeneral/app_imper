@@ -7,19 +7,20 @@
   <link rel="stylesheet" href="index.css">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#1a1a2e">
-<script type="importmap">
-{
-  "imports": {
-    "react/": "https://aistudiocdn.com/react@^19.1.1/",
-    "react": "https://aistudiocdn.com/react@^19.1.1",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/"
-  }
-}
-</script>
 </head>
 <body>
-  <div id="root"></div>
-  <script type="module" src="index.tsx"></script>
+
+  <div class="app-container">
+    <header id="profile-header" class="profile-header">
+      <!-- El perfil se renderizará aquí con JavaScript -->
+    </header>
+    
+    <main id="links-container" class="links-container">
+      <!-- Los enlaces se renderizarán aquí con JavaScript -->
+    </main>
+  </div>
+
+  <script type="module" src="index.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
