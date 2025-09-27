@@ -1,5 +1,4 @@
 {
-  "name": "Link Hub PWA",
-  "description": "Una PWA para agrupar todos tus enlaces importantes, inspirada en Linktree. Funciona sin conexión.",
-  "requestFramePermissions": []
+  "name": "LinkHub",
+  "description": "Un agregador de enlaces personal en formato PWA, inspirado en Linktree. Funciona sin conexión."
 }
