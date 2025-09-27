@@ -4,9 +4,7 @@ const urlsToCache = [
   '/index.html',
   '/index.css',
   '/index.js',
-  '/manifest.json',
-  'https://www.gstatic.com/images/branding/product/1x/google_cloud_192dp.png',
-  'https://www.gstatic.com/images/branding/product/1x/google_cloud_512dp.png'
+  '/manifest.json'
 ];
 
 self.addEventListener('install', event => {
