@@ -1,141 +1,109 @@
-// --- ¡PERSONALIZA TU CONTENIDO AQUÍ! ---
+// Fix: Wrap the entire script in an IIFE to avoid global scope pollution and resolve redeclaration conflicts.
+(function() {
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
 
-const profileData = {
-  name: "@TuMarca",
-  description: "Todos mis enlaces importantes en un solo lugar.",
-  imageUrl: "https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?q=80&w=2585&auto-format&fit=crop",
+// --- DATOS DE EJEMPLO ---
+// Siéntete libre de modificar esta sección con tu propia información.
+const profile = {
+    name: "@TuNombre",
+    bio: "¡Bienvenido a mi hub de enlaces! Aquí encontrarás todo lo importante.",
+    // Puedes usar una URL a tu propia imagen
+    avatarUrl: "https://avatar.iran.liara.run/public/boy?username=LinkHub",
 };
 
-// Para añadir/editar enlaces, simplemente modifica esta lista.
-// Pídeme que lo haga por ti si quieres.
-const linksData = [
-  {
-    title: "Mi Sitio Web Principal",
-    url: "https://example.com",
-    description: "Visita mi portafolio y blog personal.",
-    platform: "website" // Opciones: website, twitter, youtube, linkedin, email
-  },
-  {
-    title: "Sígueme en Twitter",
-    url: "https://twitter.com/example",
-    description: "Actualizaciones y pensamientos en tiempo real.",
-    platform: "twitter"
-  },
-  {
-    title: "Canal de YouTube",
-    url: "https://youtube.com/example",
-    description: "Tutoriales, vlogs y más contenido en video.",
-    platform: "youtube"
-  },
-  {
-    title: "Conecta en LinkedIn",
-    url: "https://linkedin.com/in/example",
-    description: "Perfil profesional y red de contactos.",
-    platform: "linkedin"
-  }
+// Añade o quita enlaces como necesites.
+// Los iconos son SVG. Puedes encontrar más en sitios como https://heroicons.com/
+const links = [
+    {
+        title: "Mi Sitio Web",
+        url: "https://example.com",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L8 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>`
+    },
+    {
+        title: "GitHub",
+        url: "https://github.com",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48 0-.24-.01-1.02-.01-1.85-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.1.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85 0 1.34-.01 2.42-.01 2.75 0 .27.18.58.69.48C19.13 20.17 22 16.42 22 12c0-5.52-4.48-10-10-10z"/></svg>`
+    },
+    {
+        title: "LinkedIn",
+        url: "https://linkedin.com",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zm-12 5v9h3V8h-3zM8.5 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM17 8h-2c-1.1 0-2 .9-2 2v7h3v-4.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5V17h3v-5c0-2.21-1.79-4-4-4z"/></svg>`
+    },
+    {
+        title: "Correo Electrónico",
+        url: "mailto:tuemail@example.com",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>`
+    }
 ];
 
-// --- FIN DE LA ZONA DE PERSONALIZACIÓN ---
+// --- LÓGICA DE LA APLICACIÓN ---
 
-// Selección de elementos del DOM
-const profileHeader = document.getElementById('profile-header');
-const linksContainer = document.getElementById('links-container');
-
-function getSocialIconSVG(platform) {
-  switch (platform?.toLowerCase()) {
-    case 'twitter':
-      return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`;
-    case 'youtube':
-      return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25 1.09-.83 1.8-1.73 2.02-.95.22-2.29.35-3.94.44-1.64.09-2.4.1-3.44.1h-1.75c-1.04 0-1.8-.01-3.44-.1-1.65-.09-2.99-.22-3.94-.44-.9-.22-1.48-.93-1.73-2.02C.16 15.8 0 14.19 0 12l.06-1.83c.06-.8.15-1.43.28-1.9.25-1.09.83-1.8 1.73-2.02C3.01 6.01 4.35 5.88 6 5.8 7.64 5.7 8.4 5.7 9.44 5.7h1.75c1.04 0 1.8.01 3.44.1 1.65.09 2.99.22 3.94.44.9.22 1.48.93 1.73 2.02z"/></svg>`;
-    case 'linkedin':
-      return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 21.5h-5v-13h5v13zM4 6.5C2.5 6.5 1.5 5.3 1.5 4s1-2.4 2.5-2.4c1.6 0 2.5 1 2.6 2.5 0 1.4-1 2.5-2.6 2.5zm11.5 6c-1 0-2 1-2 2v7h-5v-13h5V10s1.6-1.5 4-1.5c3 0 5 2.2 5 6.3v6.7h-5v-7c0-1-1-2-2-2z"/></svg>`;
-    case 'email':
-       return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>`;
-    default:
-      return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>`;
-  }
-}
-
+/**
+ * Renderiza el perfil del usuario en el encabezado.
+ */
 function renderProfile() {
-  profileHeader.innerHTML = `
-    <button id="install-button" class="install-button" aria-label="Instalar aplicación" hidden>Instalar App</button>
-    <img src="${profileData.imageUrl}" alt="Foto de perfil" class="profile-picture" />
-    <h1 class="profile-name">${profileData.name}</h1>
-    <p class="profile-description">${profileData.description}</p>
-  `;
-}
+    const avatar = document.getElementById('avatar');
+    const userName = document.getElementById('userName');
+    const bio = document.getElementById('bio');
 
-function renderLinks() {
-  linksContainer.innerHTML = '';
-  linksData.forEach(link => {
-    const linkElement = document.createElement('a');
-    linkElement.href = link.url;
-    linkElement.target = '_blank';
-    linkElement.rel = 'noopener noreferrer';
-    linkElement.className = 'link-card';
-    linkElement.setAttribute('aria-label', `Enlace a ${link.title}: ${link.description}`);
-    linkElement.innerHTML = `
-      <div class="link-icon">${getSocialIconSVG(link.platform)}</div>
-      <div class="link-text-content">
-        <div class="link-title">${link.title}</div>
-        <p class="link-description-text">${link.description}</p>
-      </div>
-    `;
-    linksContainer.appendChild(linkElement);
-  });
-}
-
-// Lógica de instalación de la PWA
-let deferredPrompt;
-
-function handleInstallClick() {
-  const installButton = document.getElementById('install-button');
-  if (installButton) {
-    installButton.hidden = true;
-  }
-  // Muestra el prompt de instalación
-  deferredPrompt.prompt();
-  // Espera a que el usuario responda al prompt
-  deferredPrompt.userChoice.then((choiceResult) => {
-    if (choiceResult.outcome === 'accepted') {
-      console.log('User accepted the A2HS prompt');
-    } else {
-      console.log('User dismissed the A2HS prompt');
+    if (avatar && userName && bio) {
+        avatar.src = profile.avatarUrl;
+        avatar.alt = `Avatar de ${profile.name}`;
+        userName.textContent = profile.name;
+        bio.textContent = profile.bio;
     }
-    deferredPrompt = null;
-  });
 }
 
-// Inicialización de la aplicación
+/**
+ * Renderiza los botones de enlace en el contenedor principal.
+ */
+function renderLinks() {
+    const container = document.getElementById('links-container');
+    if (!container) return;
+
+    // Limpiar contenedor existente
+    container.innerHTML = '';
+
+    links.forEach(link => {
+        const linkElement = document.createElement('a');
+        linkElement.href = link.url;
+        linkElement.className = 'link-button';
+        // Para enlaces externos, es buena práctica añadir esto por seguridad y SEO.
+        linkElement.target = '_blank';
+        linkElement.rel = 'noopener noreferrer';
+
+        linkElement.innerHTML = `
+            ${link.icon}
+            <span>${link.title}</span>
+        `;
+        container.appendChild(linkElement);
+    });
+}
+
+/**
+ * Registra el Service Worker para la funcionalidad PWA y offline.
+ */
+function registerServiceWorker() {
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                    console.log('ServiceWorker registrado con éxito:', registration.scope);
+                })
+                .catch(error => {
+                    console.log('Fallo en el registro de ServiceWorker:', error);
+                });
+        });
+    }
+}
+
+// --- INICIALIZACIÓN ---
 document.addEventListener('DOMContentLoaded', () => {
-  renderProfile();
-  renderLinks();
-  
-  // Asignar el evento click DESPUÉS de que el botón exista
-  const installButton = document.getElementById('install-button');
-  if (installButton) {
-    installButton.addEventListener('click', handleInstallClick);
-  }
+    renderProfile();
+    renderLinks();
+    registerServiceWorker();
 });
-
-window.addEventListener('beforeinstallprompt', (e) => {
-  // Previene que el mini-infobar aparezca en Chrome
-  e.preventDefault();
-  // Guarda el evento para que pueda ser disparado más tarde.
-  deferredPrompt = e;
-  // Muestra el botón de instalación personalizado
-  const installButton = document.getElementById('install-button');
-  if (installButton) {
-      installButton.hidden = false;
-  }
-});
-
-
-window.addEventListener('appinstalled', () => {
-  const installButton = document.getElementById('install-button');
-  if (installButton) {
-    installButton.hidden = true;
-  }
-  deferredPrompt = null;
-  console.log('PWA was installed');
-});
+})();
