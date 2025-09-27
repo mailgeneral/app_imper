@@ -87,25 +87,12 @@ function renderLinks() {
 
 // Lógica de instalación de la PWA
 let deferredPrompt;
-const installButton = document.getElementById('install-button');
-
-window.addEventListener('beforeinstallprompt', (e) => {
-  // Previene que el mini-infobar aparezca en Chrome
-  e.preventDefault();
-  // Guarda el evento para que pueda ser disparado más tarde.
-  deferredPrompt = e;
-  // Muestra el botón de instalación personalizado
-  const a = document.getElementById('install-button');
-  if (a) {
-      a.hidden = false;
-  }
-});
 
 function handleInstallClick() {
-    const a = document.getElementById('install-button');
-    if (a) {
-       a.hidden = true;
-    }
+  const installButton = document.getElementById('install-button');
+  if (installButton) {
+    installButton.hidden = true;
+  }
   // Muestra el prompt de instalación
   deferredPrompt.prompt();
   // Espera a que el usuario responda al prompt
@@ -119,24 +106,36 @@ function handleInstallClick() {
   });
 }
 
-
 // Inicialización de la aplicación
 document.addEventListener('DOMContentLoaded', () => {
   renderProfile();
   renderLinks();
   
-  // Asignar el evento click después de que el botón exista
+  // Asignar el evento click DESPUÉS de que el botón exista
   const installButton = document.getElementById('install-button');
   if (installButton) {
     installButton.addEventListener('click', handleInstallClick);
   }
 });
 
+window.addEventListener('beforeinstallprompt', (e) => {
+  // Previene que el mini-infobar aparezca en Chrome
+  e.preventDefault();
+  // Guarda el evento para que pueda ser disparado más tarde.
+  deferredPrompt = e;
+  // Muestra el botón de instalación personalizado
+  const installButton = document.getElementById('install-button');
+  if (installButton) {
+      installButton.hidden = false;
+  }
+});
+
+
 window.addEventListener('appinstalled', () => {
-  const a = document.getElementById('install-button');
-    if (a) {
-       a.hidden = true;
-    }
+  const installButton = document.getElementById('install-button');
+  if (installButton) {
+    installButton.hidden = true;
+  }
   deferredPrompt = null;
   console.log('PWA was installed');
 });
