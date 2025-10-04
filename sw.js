@@ -1,3 +1,4 @@
+
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
@@ -6,13 +7,13 @@
 const CACHE_NAME = 'linkhub-v3';
 const ASSETS_TO_CACHE = [
     '/',
-    '/index.html',
-    '/index.css',
-    '/index.js',
-    '/manifest.json',
-    '/icon-192.png',
-    '/icon-512.png',
-    '/avatar.png' // Cachear también el nuevo avatar
+    'index.html',
+    'index.css',
+    'index.js',
+    'manifest.json',
+    'icon-192.png',
+    'icon-512.png',
+    'avatar.png' // Cachear también el nuevo avatar
 ];
 
 // Evento 'install': se dispara cuando el Service Worker se instala.
