@@ -1,3 +1,4 @@
+
 // Fix: Wrap the entire script in an IIFE to avoid global scope pollution and resolve redeclaration conflicts.
 (function() {
 /**
@@ -10,7 +11,7 @@ const profile = {
     name: "Imperdellanta",
     bio: "La solución definitiva y ecológica para la protección de tu patrimonio. ¡Contáctanos!",
     // URL del avatar de la marca
-    avatarUrl: "/avatar.png",
+    avatarUrl: "avatar.png",
 };
 
 // --- ENLACES PRINCIPALES DE IMPERDELLANTA ---
