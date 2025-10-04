@@ -1,4 +1,3 @@
-
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
@@ -6,7 +5,7 @@
 
 const CACHE_NAME = 'linkhub-v3';
 const ASSETS_TO_CACHE = [
-    '/',
+    '.',
     'index.html',
     'index.css',
     'index.js',
