@@ -1,4 +1,5 @@
 {
-  "name": "LinkHub",
-  "description": "Un agregador de enlaces personal en formato PWA, inspirado en Linktree. Funciona sin conexión."
+  "name": "Imperdellanta Enlaces",
+  "description": "Hub de enlaces oficial de Imperdellanta. Accede a nuestro asistente virtual, tienda, precios y más.",
+  "requestFramePermissions": []
 }
