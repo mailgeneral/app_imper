@@ -1,7 +1,7 @@
 {
-    "name": "LinkHub",
-    "short_name": "LinkHub",
-    "description": "Todos tus enlaces importantes en un solo lugar.",
+    "name": "Imperdellanta Enlaces",
+    "short_name": "Imperdellanta",
+    "description": "La solución definitiva y ecológica para la protección de tu patrimonio. ¡Contáctanos!",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#121212",
