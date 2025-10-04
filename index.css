@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
 :root {
@@ -24,7 +25,37 @@ body {
     align-items: flex-start;
     min-height: 100vh;
     padding: 2rem 1rem;
+    padding-top: 4rem; /* Add padding to account for the offline bar */
 }
+
+.hidden {
+    display: none !important;
+}
+
+#offline-notification {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #c23b22;
+    color: white;
+    text-align: center;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    z-index: 1000;
+}
+
+body.offline #offline-notification {
+    display: block;
+}
+
+body.offline .link-button.external {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
 
 #root {
     width: 100%;
@@ -103,8 +134,12 @@ header {
     align-items: center;
     justify-content: center;
     gap: 0.75rem;
-    transition: transform 0.2s ease-in-out, background-color 0.2s ease;
+    transition: transform 0.2s ease-in-out, background-color 0.2s ease, opacity 0.2s ease;
     box-shadow: 0 4px 10px var(--shadow-color);
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
 }
 
 .link-button:hover, .link-button:focus {
@@ -119,6 +154,208 @@ header {
     height: 24px;
     fill: currentColor;
 }
+
+/* Offline Guide Styles */
+#offline-guide-container {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.guide-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#back-button {
+    background: none;
+    border: none;
+    color: var(--primary-text-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+#back-button:hover {
+    color: var(--accent-color);
+}
+
+.guide-header h2 {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.guide-section {
+    background-color: var(--surface-color);
+    padding: 1rem;
+    border-radius: 12px;
+}
+
+.guide-section h3 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--accent-color);
+    padding-bottom: 0.5rem;
+}
+
+.guide-section ul, .guide-section p {
+    padding-left: 0;
+    line-height: 1.6;
+    color: var(--secondary-text-color);
+}
+
+.guide-section p {
+    padding-left: 1rem;
+}
+
+.guide-section ul {
+    list-style: none;
+}
+
+.guide-section li {
+    margin-bottom: 0.75rem;
+}
+
+.guide-section li strong {
+    display: block;
+    color: var(--primary-text-color);
+    margin-bottom: 0.25rem;
+}
+
+.guide-section li p {
+    padding-left: 0 !important;
+    margin-bottom: 0.5rem;
+}
+
+/* Price Styles */
+.product-price {
+    padding-left: 0 !important;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.list-price {
+    text-decoration: line-through;
+    color: var(--secondary-text-color);
+    font-size: 0.9em;
+    font-weight: 400;
+}
+
+.sale-price {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+.offer-description {
+    font-size: 0.9rem;
+    color: #FFD700; /* Gold */
+    padding-left: 0 !important;
+    margin-top: -0.25rem;
+    margin-bottom: 1rem;
+}
+
+.price-vat {
+    margin-top: -0.75rem;
+    margin-bottom: 0.75rem;
+    padding-left: 0 !important;
+}
+
+.price-vat small {
+    font-weight: 400;
+    font-size: 0.8rem;
+    color: var(--secondary-text-color);
+}
+
+
+.price-disclaimer {
+    background-color: rgba(255, 165, 0, 0.1);
+    border-left: 3px solid orange;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.price-disclaimer p {
+    padding-left: 0 !important;
+    margin: 0;
+}
+
+.price-disclaimer a {
+    color: var(--accent-color);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.price-disclaimer a:hover {
+    text-decoration: underline;
+}
+
+.small-text {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin-top: 0.25rem;
+}
+
+
+/* Accordion Styles */
+.accordion-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.accordion-item:last-child {
+    border-bottom: none;
+}
+
+.accordion-header {
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    padding: 1rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-text-color);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.accordion-header::after {
+    content: '+';
+    font-size: 1.5rem;
+    transition: transform 0.2s ease;
+}
+
+.accordion-header.active::after {
+    content: '−';
+    transform: rotate(180deg);
+}
+
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+    color: var(--secondary-text-color);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    padding: 0 0.5rem;
+}
+
+.accordion-content p {
+    padding-bottom: 1rem;
+    padding-left: 0;
+}
+
 
 footer {
     padding-top: 1rem;

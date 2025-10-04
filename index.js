@@ -9,13 +9,118 @@
 const profile = {
     name: "Imperdellanta",
     bio: "La solución definitiva y ecológica para la protección de tu patrimonio. ¡Contáctanos!",
-    // URL del avatar de la marca
     avatarUrl: "avatar.png",
 };
 
+// --- DATOS PARA GUÍA OFFLINE ---
+const offlineData = {
+    products: [
+        {
+            name: "IMPERDELLANTA 7 (Cubeta 19L)",
+            precio_lista: 799.00,
+            precio_venta: 719.00,
+            promocion_activa: true,
+            descripcion_oferta: "¡Aprovecha nuestro descuento por Apertura de Nuevo Local! Válido hasta el 31 de octubre.",
+            details: `<strong>Clasificación:</strong> Equilibrio perfecto entre resistencia y precio.<br><br>
+                      <strong>Descripción:</strong> Impermeabilizante elastomérico con caucho reciclado y fibra de celulosa. No necesita malla de refuerzo.<br><br>
+                      <strong>Beneficios Clave:</strong> Durabilidad de 7+ años, resiste humedad y rayos UV, reduce calor y ruido, secado rápido.<br><br>
+                      <strong>Rendimiento:</strong> 20 m² por cubeta de 19L (a dos capas).`
+        },
+        {
+            name: "IMPERDELLANTA 12 (Cubeta 19L)",
+            precio_lista: 899.00,
+            precio_venta: 809.00,
+            promocion_activa: true,
+            descripcion_oferta: "¡Aprovecha nuestro descuento por Apertura de Nuevo Local! Válido hasta el 31 de octubre.",
+            details: `<strong>Clasificación:</strong> Máxima protección y durabilidad.<br><br>
+                      <strong>Descripción:</strong> Impermeabilizante premium con resina de alto desempeño y caucho reciclado. Máxima elasticidad y resistencia.<br><br>
+                      <strong>Beneficios Clave:</strong> Durabilidad de 12+ años, soporta cambios climáticos bruscos, sin malla de refuerzo, amigable con el ambiente.<br><br>
+                      <strong>Rendimiento:</strong> 20 m² por cubeta de 19L (a dos capas).`
+        },
+        {
+            name: "RESANADOR RS-MAX (Envase 1L)",
+            precio_lista: 199.00,
+            precio_venta: 199.00,
+            promocion_activa: false,
+            descripcion_oferta: "",
+            details: `<strong>Clasificación:</strong> Blindaje anti goteras y fisuras.<br><br>
+                      <strong>Descripción:</strong> Pasta para resanar grietas y fisuras con máxima resistencia y elasticidad. Solución definitiva a goteras.<br><br>
+                      <strong>Beneficios Clave:</strong> Durabilidad de 10 años, alta adherencia, repele agua y humedad, elongación del 150%.<br><br>
+                      <strong>Presentación:</strong> 1L incluye malla de fibra de vidrio.`
+        },
+        {
+            name: "SELLADOR SELLAPLUS EX (Garrafa 1L)",
+            precio_lista: 199.00,
+            precio_venta: 199.00,
+            promocion_activa: false,
+            descripcion_oferta: "",
+            details: `<strong>Clasificación:</strong> Extra adherente, el vínculo perfecto.<br><br>
+                      <strong>Descripción:</strong> Sellador acrílico concentrado que actúa como puente de adherencia entre la superficie y el acabado final.<br><br>
+                      <strong>Beneficios Clave:</strong> Aumenta durabilidad y rendimiento del impermeabilizante, sella poros, protege contra salitre, secado rápido.<br><br>
+                      <strong>Rendimiento:</strong> 38-40 m² por litro de sellador diluido.`
+        },
+        {
+            name: "PINTURA LIDERPINT (Cubeta 19L)",
+            precio_lista: 747.00,
+            precio_venta: 747.00,
+            promocion_activa: false,
+            descripcion_oferta: "",
+            details: `<strong>Clasificación:</strong> Calidad económica para interiores.<br><br>
+                      <strong>Descripción:</strong> Pintura vinil-acrílica económica ideal para obras y paredes interiores que buscan un acabado mate uniforme.<br><br>
+                      <strong>Beneficios Clave:</strong> Económica y rendidora, fácil aplicación, garantía de 3 años en interiores.<br><br>
+                      <strong>Rendimiento:</strong> 70-90 m² por cubeta de 19L.`
+        },
+        {
+            name: "PINTURA OLYMPUS 300 (Cubeta 19L)",
+            precio_lista: 1780.00,
+            precio_venta: 1780.00,
+            promocion_activa: false,
+            descripcion_oferta: "",
+            details: `<strong>Clasificación:</strong> Pintura premium para exteriores.<br><br>
+                      <strong>Descripción:</strong> Pintura vinil-acrílica de alto desempeño con excelente poder cubriente y gran resistencia a los rayos UV y al intemperismo.<br><br>
+                      <strong>Beneficios Clave:</strong> Calidad premium, lavable (resiste 4000+ ciclos), alto rendimiento, ideal para fachadas.<br><br>
+                      <strong>Rendimiento:</strong> 130-170 m² por cubeta de 19L.`
+        }
+    ],
+    applicationGuide: [
+        "<strong>Limpiar la superficie:</strong> Debe estar seca y libre de polvo, grasa o residuos.",
+        "<strong>Reparar fisuras:</strong> Usar RESANADOR RS-MAX en grietas y puntos críticos.",
+        "<strong>Sellar la superficie:</strong> Aplicar una capa de SELLADOR SELLAPLUS EX diluido y dejar secar 1 hora.",
+        "<strong>Primera capa de Imperdellanta:</strong> Aplicar en sentido vertical y dejar secar de 1 a 3 horas.",
+        "<strong>Segunda capa de Imperdellanta:</strong> Aplicar en sentido horizontal (cruzado) y dejar secar 3 horas antes de exponer al agua.",
+    ],
+    contact: {
+        address: "25 poniente 1902 | 72410 Los Volcanes, Puebla, Pue.",
+        phone: "222-849-6995",
+        hours: [
+            "<strong>Lunes a Viernes:</strong> 9:00 - 17:30",
+            "<strong>Sábado:</strong> 9:00 - 14:00"
+        ]
+    },
+    faq: [
+        {
+            question: "¿Puedo aplicar Imperdellanta sobre un impermeabilizante viejo?",
+            answer: "Sí, pero es crucial. Debes retirar todo el material viejo que esté suelto o mal adherido. La superficie debe estar completamente limpia y seca para garantizar la máxima adherencia del nuevo producto."
+        },
+        {
+            question: "¿Realmente no necesito malla de refuerzo?",
+            answer: "¡Correcto! Nuestros impermeabilizantes Imperdellanta 7 y 12 están reforzados con fibra de celulosa, lo que elimina la necesidad de usar malla en la mayoría de las superficies, ahorrándote tiempo y dinero."
+        },
+        {
+            question: "¿Qué pasa si llueve poco después de aplicar?",
+            answer: "El tiempo de secado al tacto es de 1-3 horas por capa. Es ideal aplicar con un pronóstico de al menos 24 horas sin lluvia para asegurar un curado correcto y evitar que el acabado se vea afectado."
+        }
+    ]
+};
+
+
 // --- ENLACES PRINCIPALES DE IMPERDELLANTA ---
-// Iconos SVG personalizados para cada servicio.
 const links = [
+    {
+        title: "Guía Rápida (Offline)",
+        url: "#offline-guide",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5-.46 0-.91.03-1.34.09.23.69.48 1.45.74 2.25.75 2.25 1.05 4.86 1.1 7.16-.05 2.3-.35 4.91-1.1 7.16-.26.8-.51 1.56-.74 2.25.43.06.88.09 1.34.09 1.95 0 4.05-.4 5.5-1.5 1.45 1.1 3.55 1.5 5.5 1.5 1.17 0 2.39-.15 3.5-.5.84-2.21 1.1-4.78 1-7S21.84 7.21 21 5zM4.09 6.34C4.06 6.23 4.03 6.11 4 6c1.11-.35 2.33-.5 3.5-.5 1.95 0 4.05.4 5.5 1.5V18c-1.45-1.1-3.55-1.5-5.5-1.5-.46 0-.91.03-1.34.09.23-.69.48-1.45.74-2.25.75-2.25 1.05-4.86 1.1-7.16-.05-2.3-.35-4.91-1.1-7.16-.18-.54-.36-1.09-.55-1.65z"/></svg>`
+    },
     {
         title: "Asistente Virtual",
         url: "https://mailgeneral.github.io/bot_app/",
@@ -53,7 +158,7 @@ const links = [
     },
     {
         title: "Calculadora de Materiales",
-        url: "https://drino.short.gy/CACULADORA-IMPERMEABILIZANTE",
+        url: "https://drino.short.gy/CACULADORA-IMPERMEABILIZante",
         icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M4 2a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V4a2 2 0 00-2-2H4zm1 4h2v2H5V6zm3 0h2v2H8V6zm3 0h2v2h-2V6zm-6 3h2v2H5V9zm3 0h2v2H8V9zm3 0h2v2h-2V9zm-6 3h8v2H5v-2z"/></svg>`
     },
     {
@@ -80,27 +185,19 @@ function setupInstallButton() {
     if (!installButton) return;
 
     window.addEventListener('beforeinstallprompt', (e) => {
-        // Previene que Chrome muestre el mini-infobar
         e.preventDefault();
-        // Guarda el evento para que pueda ser disparado más tarde.
         deferredPrompt = e;
-        // Muestra nuestro botón de instalación personalizado
         installButton.style.display = 'block';
 
         installButton.addEventListener('click', async () => {
-            // Oculta nuestro botón, ya que solo se puede usar una vez.
             installButton.style.display = 'none';
-            // Muestra el diálogo de instalación
             deferredPrompt.prompt();
-            // Espera a que el usuario responda
             const { outcome } = await deferredPrompt.userChoice;
             console.log(`El usuario respondió al diálogo: ${outcome}`);
-            // Limpiamos la variable, ya no la necesitamos
             deferredPrompt = null;
         });
     });
 }
-
 
 /**
  * Renderiza el perfil del usuario en el encabezado.
@@ -124,27 +221,156 @@ function renderProfile() {
 function renderLinks() {
     const container = document.getElementById('links-container');
     if (!container) return;
-
-    // Limpiar contenedor existente
     container.innerHTML = '';
 
     links.forEach(link => {
-        const linkElement = document.createElement('a');
-        linkElement.href = link.url;
-        linkElement.className = 'link-button';
-        
-        // Para enlaces que no son 'tel:', abrir en nueva pestaña.
-        if (!link.url.startsWith('tel:')) {
-            linkElement.target = '_blank';
-            linkElement.rel = 'noopener noreferrer';
+        if (link.url === '#offline-guide') {
+            const buttonElement = document.createElement('button');
+            buttonElement.className = 'link-button';
+            buttonElement.innerHTML = `${link.icon}<span>${link.title}</span>`;
+            buttonElement.addEventListener('click', showOfflineGuide);
+            container.appendChild(buttonElement);
+        } else {
+            const linkElement = document.createElement('a');
+            linkElement.href = link.url;
+            linkElement.className = 'link-button external'; // Add 'external' class for offline styling
+            if (!link.url.startsWith('tel:')) {
+                linkElement.target = '_blank';
+                linkElement.rel = 'noopener noreferrer';
+            }
+            linkElement.innerHTML = `${link.icon}<span>${link.title}</span>`;
+            container.appendChild(linkElement);
         }
-
-        linkElement.innerHTML = `
-            ${link.icon}
-            <span>${link.title}</span>
-        `;
-        container.appendChild(linkElement);
     });
+}
+
+/**
+ * Renderiza el contenido de la guía offline.
+ */
+function renderOfflineGuide() {
+    const container = document.getElementById('offline-guide-container');
+    if (!container) return;
+
+    const productsHtml = offlineData.products.map(p => {
+        let priceHtml = '';
+        if (p.promocion_activa && p.precio_lista > p.precio_venta) {
+            priceHtml = `
+                <p class="product-price">
+                    <span class="list-price">$${p.precio_lista.toFixed(2)} MXN</span>
+                    <span class="sale-price">$${p.precio_venta.toFixed(2)} MXN</span>
+                </p>
+                <p class="offer-description">🔥 ${p.descripcion_oferta}</p>
+            `;
+        } else {
+            priceHtml = `
+                <p class="product-price">
+                    <span class="sale-price">$${p.precio_venta.toFixed(2)} MXN</span>
+                </p>
+            `;
+        }
+        
+        return `
+            <div class="accordion-item">
+                <button class="accordion-header">${p.name}</button>
+                <div class="accordion-content">
+                    ${priceHtml}
+                    <p class="price-vat"><small>(IVA incluido)</small></p>
+                    <p>${p.details}</p>
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    const applicationGuideHtml = `<ul>${offlineData.applicationGuide.map(step => `<li>${step}</li>`).join('')}</ul>`;
+    
+    const contactHtml = `
+        <p>${offlineData.contact.address}</p>
+        <p><strong>Teléfono:</strong> ${offlineData.contact.phone}</p>
+        <ul>${offlineData.contact.hours.map(h => `<li>${h}</li>`).join('')}</ul>
+    `;
+
+    const faqHtml = `<ul>${offlineData.faq.map(item => `<li><strong>${item.question}</strong><p>${item.answer}</p></li>`).join('')}</ul>`;
+
+    const priceDisclaimerHtml = `
+        <div class="price-disclaimer">
+            <p>Precios offline pueden estar desactualizados, confirma los precios con la <a href="https://drino.short.gy/IMPERDELLANTA_PRECIOS" target="_blank" rel="noopener noreferrer">versión oficial aquí</a> cuando estés en línea.</p>
+            <p class="small-text">Precios sujetos a cambios sin previo aviso.</p>
+        </div>
+    `;
+
+    container.innerHTML = `
+        <div class="guide-header">
+            <button id="back-button" aria-label="Volver a enlaces">←</button>
+            <h2>Guía Rápida</h2>
+        </div>
+        <div class="guide-section">
+            <h3>Productos Esenciales</h3>
+            ${priceDisclaimerHtml}
+            ${productsHtml}
+        </div>
+        <div class="guide-section">
+            <h3>Guía Rápida de Aplicación</h3>
+            ${applicationGuideHtml}
+        </div>
+        <div class="guide-section">
+            <h3>Tips Profesionales (FAQ)</h3>
+            ${faqHtml}
+        </div>
+        <div class="guide-section">
+            <h3>Contacto y Horarios</h3>
+            ${contactHtml}
+        </div>
+    `;
+
+    document.getElementById('back-button').addEventListener('click', showMainView);
+    
+    container.querySelectorAll('.accordion-header').forEach(button => {
+        button.addEventListener('click', () => {
+            const content = button.nextElementSibling;
+            button.classList.toggle('active');
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        });
+    });
+}
+
+/**
+ * Muestra la vista de la guía offline y oculta la principal.
+ */
+function showOfflineGuide() {
+    document.getElementById('links-container').classList.add('hidden');
+    document.getElementById('offline-guide-container').classList.remove('hidden');
+    document.getElementById('bio').classList.add('hidden');
+    document.getElementById('install-button').classList.add('hidden');
+}
+
+/**
+ * Muestra la vista principal de enlaces y oculta la guía offline.
+ */
+function showMainView() {
+    document.getElementById('links-container').classList.remove('hidden');
+    document.getElementById('offline-guide-container').classList.add('hidden');
+    document.getElementById('bio').classList.remove('hidden');
+    // Re-show install button only if deferredPrompt is available
+    if (deferredPrompt) {
+        document.getElementById('install-button').style.display = 'block';
+    } else {
+        document.getElementById('install-button').classList.remove('hidden');
+    }
+}
+
+/**
+ * Actualiza la UI basada en el estado de la conexión.
+ */
+function updateOnlineStatus() {
+    if (navigator.onLine) {
+        document.body.classList.remove('offline');
+    } else {
+        document.body.classList.add('offline');
+    }
 }
 
 /**
@@ -168,7 +394,13 @@ function registerServiceWorker() {
 document.addEventListener('DOMContentLoaded', () => {
     renderProfile();
     renderLinks();
+    renderOfflineGuide();
     registerServiceWorker();
-    setupInstallButton(); // <-- Añadimos la nueva función aquí
+    setupInstallButton();
+
+    // Setup online/offline status detection
+    updateOnlineStatus();
+    window.addEventListener('online', updateOnlineStatus);
+    window.addEventListener('offline', updateOnlineStatus);
 });
 })();

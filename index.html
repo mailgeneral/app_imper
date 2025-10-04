@@ -16,8 +16,12 @@
     <meta name="apple-mobile-web-app-title" content="Imperdellanta">
     <link rel="apple-touch-icon" href="icon-192.png">
     <script type="module" src="index.js"></script>
+<link rel="stylesheet" href="/index.css">
 </head>
 <body>
+    <div id="offline-notification">
+        Estás en modo sin conexión. Algunas funciones pueden no estar disponibles.
+    </div>
     <div id="root">
         <header>
             <img id="avatar" src="avatar.png" alt="Avatar de Imperdellanta">
@@ -25,9 +29,16 @@
             <p id="bio">La solución definitiva y ecológica para la protección de tu patrimonio.</p>
             <button id="install-button" style="display: none;">Instalar App</button>
         </header>
-        <main id="links-container">
-            <!-- Los enlaces se insertarán aquí dinámicamente -->
-        </main>
+
+        <div id="main-content">
+            <main id="links-container">
+                <!-- Los enlaces se insertarán aquí dinámicamente -->
+            </main>
+            <main id="offline-guide-container" class="hidden">
+                <!-- La guía offline se insertará aquí dinámicamente -->
+            </main>
+        </div>
+
         <footer>
             <p>&copy; Imperdellanta</p>
         </footer>
@@ -35,5 +46,6 @@
     <noscript>
         Necesitas habilitar JavaScript para usar esta aplicación.
     </noscript>
+<script type="module" src="/index.tsx"></script>
 </body>
 </html>
