@@ -5,7 +5,7 @@
     --surface-color: #1e1e1e;
     --primary-text-color: #e0e0e0;
     --secondary-text-color: #a0a0a0;
-    --accent-color: #bb86fc;
+    --accent-color: #72B840; /* Verde Imperdellanta */
     --shadow-color: rgba(0, 0, 0, 0.5);
 }
 
@@ -79,7 +79,7 @@ header {
 
 #install-button:hover, #install-button:focus {
     transform: scale(1.05);
-    background-color: #c89eff; /* Un poco más claro al pasar el mouse */
+    background-color: #8BC34A; /* Verde un poco más claro al pasar el mouse */
     outline: none;
 }
 
