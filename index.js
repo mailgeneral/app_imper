@@ -1,4 +1,3 @@
-
 // Fix: Wrap the entire script in an IIFE to avoid global scope pollution and resolve redeclaration conflicts.
 (function() {
 /**
@@ -154,7 +153,7 @@ function renderLinks() {
 function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js')
+            navigator.serviceWorker.register('sw.js')
                 .then(registration => {
                     console.log('ServiceWorker registrado con éxito:', registration.scope);
                 })
