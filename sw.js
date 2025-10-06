@@ -19,6 +19,8 @@ const ASSETS_TO_CACHE = [
 // Evento 'install': se dispara cuando el Service Worker se instala.
 // Aquí es donde pre-cacheamos los recursos estáticos de la aplicación.
 self.addEventListener('install', event => {
+    // Forzar la activación inmediata del nuevo Service Worker.
+    self.skipWaiting();
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then(cache => {
@@ -40,7 +42,10 @@ self.addEventListener('activate', event => {
                         return caches.delete(cacheName);
                     }
                 })
-            );
+            ).then(() => {
+                // Tomar control inmediato de los clientes (pestañas)
+                return self.clients.claim();
+            });
         })
     );
 });

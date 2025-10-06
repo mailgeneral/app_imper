@@ -798,13 +798,23 @@ function registerServiceWorker() {
             navigator.serviceWorker.register('sw.js')
                 .then(registration => {
                     console.log('ServiceWorker registrado con éxito:', registration.scope);
+                    // Forzar la comprobación de una actualización en cada carga.
+                    registration.update();
                 })
                 .catch(error => {
                     console.log('Fallo en el registro de ServiceWorker:', error);
                 });
+
+            // Este evento se dispara cuando el service worker que controla la página cambia.
+            // Es el momento perfecto para recargar y obtener el nuevo contenido.
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                console.log('Nuevo Service Worker activado. Recargando página...');
+                window.location.reload();
+            });
         });
     }
 }
+
 
 /**
  * Función principal asíncrona para inicializar la aplicación.
