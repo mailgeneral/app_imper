@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
 :root {
@@ -136,11 +135,9 @@ header {
     overflow: hidden;
     border-radius: 12px;
     background-color: transparent; /* Blend with body background */
-    padding: 0;
     cursor: pointer;
     position: relative;
     box-shadow: none;
-    height: 110px;
     border: none; /* Removed border to blend with background */
     transition: background-color 0.3s ease; /* Add transition for new hover effect */
 }
@@ -150,18 +147,13 @@ header {
 }
 
 #info-slider-track {
-    /* This element will contain the absolute positioned slides */
-    position: relative;
+    display: grid; /* Use Grid to stack slides and auto-manage height */
     width: 100%;
-    height: 100%;
 }
 
 .info-slide {
-    position: absolute; /* Stack slides for fading transition */
-    top: 0;
-    left: 0;
+    grid-area: 1 / 1; /* Stack all slides in the same cell */
     width: 100%;
-    height: 100%;
     opacity: 0;
     transition: opacity 0.7s ease-in-out;
     pointer-events: none; /* Avoid clicking hidden slides */
@@ -170,7 +162,7 @@ header {
     align-items: center;
     justify-content: center; /* Center the text block vertically */
     text-align: center;
-    padding: 0.75rem 1rem; /* Add vertical padding for breathing room */
+    padding: 1.25rem 1rem; /* Increased vertical padding for breathing room */
 }
 
 .info-slide.active {
