@@ -12,7 +12,8 @@ const ASSETS_TO_CACHE = [
     'manifest.json',
     'icon-192.png',
     'icon-512.png',
-    'avatar.png' // Cachear también el nuevo avatar
+    'avatar.png',
+    'precios.json' // Cachear el archivo de precios para la guía offline
 ];
 
 // Evento 'install': se dispara cuando el Service Worker se instala.
