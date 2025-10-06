@@ -136,17 +136,17 @@ header {
     overflow: hidden;
     border-radius: 12px;
     background-color: transparent; /* Blend with body background */
-    padding: 0; /* Remove padding to make it less button-like */
+    padding: 0;
     cursor: pointer;
     position: relative;
-    box-shadow: none; /* Remove shadow */
-    height: 110px; /* Adjusted for CTA text */
-    border: 1px solid rgba(114, 184, 64, 0.15); /* Subtle hint of a container */
-    transition: border-color 0.3s ease;
+    box-shadow: none;
+    height: 110px;
+    border: none; /* Removed border to blend with background */
+    transition: background-color 0.3s ease; /* Add transition for new hover effect */
 }
 
 #info-slider-container:hover {
-    border-color: var(--accent-color); /* Highlight on hover for clickability */
+    background-color: rgba(255, 255, 255, 0.05); /* Subtle glow on hover for clickability */
 }
 
 #info-slider-track {
@@ -168,9 +168,9 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: center; /* Center the text block vertically */
     text-align: center;
-    padding: 0 1rem; /* Avoid text overflow on mobile */
+    padding: 0.75rem 1rem; /* Add vertical padding for breathing room */
 }
 
 .info-slide.active {
@@ -183,11 +183,9 @@ header {
     content: 'Ver detalle';
     font-size: 0.8rem;
     color: var(--accent-color);
-    position: absolute;
-    bottom: 0.75rem;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0.6;
+    opacity: 0.7; /* Slightly more visible */
+    margin-top: auto; /* Pushes CTA to the bottom of the flex container */
+    padding-top: 0.5rem; /* Ensures space between main text and CTA */
 }
 
 .info-slide strong {

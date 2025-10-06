@@ -1,4 +1,3 @@
-
 // Fix: Wrap the entire script in an IIFE to avoid global scope pollution and resolve redeclaration conflicts.
 (function() {
 /**
@@ -116,11 +115,16 @@ function renderInfoSlider() {
 
     container.addEventListener('click', () => {
         const activeSlide = track.querySelector('.info-slide.active');
-        if (activeSlide) {
-            const productName = activeSlide.getAttribute('data-target-product');
-            if (productName) {
-                navigateToProduct(productName);
-            }
+        if (!activeSlide) return; // Safety check
+
+        const productName = activeSlide.getAttribute('data-target-product');
+        
+        // If the slide has a specific product, navigate directly to it.
+        if (productName) {
+            navigateToProduct(productName);
+        } else {
+            // Otherwise, take the user to the main guide view.
+            showView('offline-guide-container');
         }
     });
 }
