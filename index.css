@@ -884,3 +884,90 @@ footer {
     font-size: 0.9rem;
     color: var(--primary-text-color);
 }
+
+/* Chatbot FAB and Modal Styles */
+#chat-fab {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    background-color: var(--accent-color);
+    color: var(--background-color);
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    cursor: pointer;
+    z-index: 999;
+    transition: transform 0.2s ease-in-out;
+}
+
+#chat-fab:hover {
+    transform: scale(1.1);
+}
+
+#chat-fab svg {
+    width: 32px;
+    height: 32px;
+}
+
+#chat-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+#chat-modal.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.chat-modal-content {
+    position: relative;
+    width: 90%;
+    height: 85%;
+    max-width: 500px;
+    max-height: 700px;
+    background-color: var(--surface-color);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 24px var(--shadow-color);
+    overflow: hidden; /* Ensures iframe respects border-radius */
+}
+
+#chat-modal-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: none;
+    border: none;
+    color: var(--secondary-text-color);
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 10;
+    padding: 0.25rem 0.5rem;
+}
+#chat-modal-close:hover {
+    color: var(--primary-text-color);
+}
+
+
+#chat-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}

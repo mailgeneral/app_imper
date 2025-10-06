@@ -21,11 +21,6 @@ let featuredProductInterval; // To hold the cycling interval
 // --- ENLACES PRINCIPALES DE IMPERDELLANTA ---
 const links = [
     {
-        title: "Asistente Virtual",
-        url: "https://mailgeneral.github.io/bot_app/",
-        icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM8.5 12c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5S7 14.33 7 13.5 7.67 12 8.5 12zm3.5 5.5c-2.33 0-4.31-1.46-5.11-3.5h10.22c-.8 2.04-2.78 3.5-5.11 3.5zm3.5-5.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5z"/></svg>`
-    },
-    {
         title: "Calculadora de Protección",
         url: "#calculator",
         icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM8 17H6v-2h2v2zm0-4H6v-2h2v2zm0-4H6V7h2v2zm4 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2zm4 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"/></svg>`
@@ -829,6 +824,38 @@ function registerServiceWorker() {
     }
 }
 
+/**
+ * Configura y maneja los eventos del modal del chatbot.
+ */
+function setupChatbotModal() {
+    const fab = document.getElementById('chat-fab');
+    const modal = document.getElementById('chat-modal');
+    const closeBtn = document.getElementById('chat-modal-close');
+    const iframe = document.getElementById('chat-iframe');
+    const chatbotUrl = "https://mailgeneral.github.io/bot_app/";
+
+    fab.addEventListener('click', () => {
+        if (iframe.src !== chatbotUrl) {
+            iframe.src = chatbotUrl;
+        }
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; // Evita el scroll del fondo
+    });
+
+    const closeModal = () => {
+        modal.classList.add('hidden');
+        document.body.style.overflow = ''; // Restaura el scroll
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (event) => {
+        // Cierra el modal solo si se hace clic en el fondo oscuro (el propio modal)
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
+}
+
 
 /**
  * Función principal asíncrona para inicializar la aplicación.
@@ -839,6 +866,7 @@ async function initializeApp() {
     registerServiceWorker();
     setupInstallButton();
     setupIosInstallPrompt();
+    setupChatbotModal();
     
     updateOnlineStatus();
     window.addEventListener('online', updateOnlineStatus);
