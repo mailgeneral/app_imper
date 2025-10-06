@@ -1,3 +1,4 @@
+
 // Fix: Wrap the entire script in an IIFE to avoid global scope pollution and resolve redeclaration conflicts.
 (function() {
 /**
@@ -72,7 +73,7 @@ const links = [
 let deferredPrompt;
 
 /**
- * Renderiza el carrusel de información dinámica.
+ * Renderiza el carrusel de información dinámica con transición de desvanecimiento.
  */
 function renderInfoSlider() {
     const container = document.getElementById('info-slider-container');
@@ -95,22 +96,31 @@ function renderInfoSlider() {
     const slides = track.querySelectorAll('.info-slide');
     const totalSlides = slides.length;
 
-    function showSlide(index) {
-        track.style.transform = `translateX(-${index * 100}%)`;
-    }
+    if (totalSlides === 0) return;
 
-    function nextSlide() {
+    // Mostrar el primer slide inicialmente
+    slides[currentSlideIndex].classList.add('active');
+
+    function showNextSlide() {
+        // Desvanecer el slide actual
+        slides[currentSlideIndex].classList.remove('active');
+
+        // Actualizar índice
         currentSlideIndex = (currentSlideIndex + 1) % totalSlides;
-        showSlide(currentSlideIndex);
+
+        // Mostrar el siguiente slide
+        slides[currentSlideIndex].classList.add('active');
     }
 
-    setInterval(nextSlide, 7000); // Cambia de slide cada 7 segundos
+    setInterval(showNextSlide, 7000); // Cambia de slide cada 7 segundos
 
     container.addEventListener('click', () => {
-        const currentSlide = slides[currentSlideIndex];
-        const productName = currentSlide.getAttribute('data-target-product');
-        if (productName) {
-            navigateToProduct(productName);
+        const activeSlide = track.querySelector('.info-slide.active');
+        if (activeSlide) {
+            const productName = activeSlide.getAttribute('data-target-product');
+            if (productName) {
+                navigateToProduct(productName);
+            }
         }
     });
 }

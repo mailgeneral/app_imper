@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
 :root {
@@ -134,30 +135,59 @@ header {
     width: 100%;
     overflow: hidden;
     border-radius: 12px;
-    background-color: var(--surface-color);
-    padding: 1rem;
+    background-color: transparent; /* Blend with body background */
+    padding: 0; /* Remove padding to make it less button-like */
     cursor: pointer;
     position: relative;
-    box-shadow: 0 2px 8px var(--shadow-color);
-    height: 100px; /* Altura fija para evitar saltos de contenido */
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    box-shadow: none; /* Remove shadow */
+    height: 110px; /* Adjusted for CTA text */
+    border: 1px solid rgba(114, 184, 64, 0.15); /* Subtle hint of a container */
+    transition: border-color 0.3s ease;
+}
+
+#info-slider-container:hover {
+    border-color: var(--accent-color); /* Highlight on hover for clickability */
 }
 
 #info-slider-track {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
+    /* This element will contain the absolute positioned slides */
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 
 .info-slide {
-    flex: 0 0 100%; /* Cada slide ocupa el 100% del contenedor */
+    position: absolute; /* Stack slides for fading transition */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.7s ease-in-out;
+    pointer-events: none; /* Avoid clicking hidden slides */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Centrar verticalmente */
+    justify-content: center;
     text-align: center;
-    padding: 0 0.5rem; /* Espacio para que el texto no toque los bordes */
+    padding: 0 1rem; /* Avoid text overflow on mobile */
+}
+
+.info-slide.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Add a call to action for clickability */
+.info-slide::after {
+    content: 'Ver detalle';
+    font-size: 0.8rem;
+    color: var(--accent-color);
+    position: absolute;
+    bottom: 0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.6;
 }
 
 .info-slide strong {
