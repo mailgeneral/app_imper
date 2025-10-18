@@ -975,66 +975,36 @@ footer {
 /* Update Notification Styles */
 #update-notification {
     position: fixed;
-    bottom: 1.5rem;
+    bottom: -100px; /* Initially off-screen */
     left: 50%;
     transform: translateX(-50%);
-    background-color: var(--accent-color);
-    color: var(--background-color);
+    background-color: #333; /* Darker than surface */
+    color: var(--primary-text-color);
     padding: 1rem 1.5rem;
     border-radius: 50px;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    z-index: 1002;
     display: flex;
     align-items: center;
-    gap: 1.5rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    z-index: 1002;
-    font-weight: 600;
+    gap: 1rem;
+    transition: bottom 0.5s ease-in-out;
 }
 
-#update-notification.hidden {
-    display: none;
+#update-notification.show {
+    bottom: 6.5rem; /* Position it above the chat FAB */
 }
 
-#update-apply-btn {
-    background-color: var(--background-color);
-    color: var(--accent-color);
+#update-now-btn {
+    background-color: var(--accent-color);
+    color: var(--background-color);
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 50px;
-    font-family: 'Poppins', sans-serif;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition: background-color 0.2s ease;
 }
 
-#update-apply-btn:hover {
-    background-color: #f0f0f0;
-}
-
-#update-check-btn {
-    background-color: var(--error-color);
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 50px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    font-family: 'Poppins', sans-serif;
-    cursor: pointer;
-    margin-top: 1rem;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-}
-
-#update-check-btn:hover {
-    background-color: #a5321e; /* Darker red */
-    transform: scale(1.05);
-}
-
-#update-check-btn:disabled {
-    background-color: #555;
-    color: #999;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-    opacity: 1;
+#update-now-btn:hover {
+    background-color: #8BC34A;
 }
