@@ -26,6 +26,10 @@ self.addEventListener('install', event => {
                 console.log('Cache abierto y recursos pre-cacheados');
                 return cache.addAll(ASSETS_TO_CACHE);
             })
+            .then(() => {
+                // Forzar la activación inmediata del nuevo Service Worker.
+                return self.skipWaiting();
+            })
     );
 });
 
@@ -78,11 +82,4 @@ self.addEventListener('fetch', event => {
             });
         })
     );
-});
-
-// Listener para recibir mensajes del cliente
-self.addEventListener('message', event => {
-    if (event.data && event.data.type === 'SKIP_WAITING') {
-        self.skipWaiting();
-    }
 });

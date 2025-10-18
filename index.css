@@ -972,39 +972,31 @@ footer {
     border: none;
 }
 
-/* Update Notification Styles */
-#update-notification {
+/* Update FAB styles */
+#update-fab {
     position: fixed;
-    bottom: -100px; /* Initially off-screen */
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #333; /* Darker than surface */
-    color: var(--primary-text-color);
-    padding: 1rem 1.5rem;
+    bottom: 2rem;
+    left: 2rem;
+    background-color: var(--error-color);
+    color: white;
     border-radius: 50px;
-    box-shadow: 0 4px 12px var(--shadow-color);
-    z-index: 1002;
+    border: none;
     display: flex;
     align-items: center;
-    gap: 1rem;
-    transition: bottom 0.5s ease-in-out;
-}
-
-#update-notification.show {
-    bottom: 6.5rem; /* Position it above the chat FAB */
-}
-
-#update-now-btn {
-    background-color: var(--accent-color);
-    color: var(--background-color);
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 50px;
-    font-weight: 600;
+    justify-content: center;
+    box-shadow: 0 4px 12px var(--shadow-color);
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    z-index: 998; /* Below chat fab modal, above content */
+    transition: transform 0.2s ease-in-out, background-color 0.2s ease;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.6rem 1.2rem;
+    -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
 }
 
-#update-now-btn:hover {
-    background-color: #8BC34A;
+#update-fab:hover, #update-fab:focus {
+    transform: scale(1.05);
+    background-color: #a72f1c; /* Darker red */
+    outline: none;
 }
