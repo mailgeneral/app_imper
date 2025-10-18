@@ -18,6 +18,11 @@ let offlineData = {};
 let infoSlidesData = [];
 let featuredProductInterval; // To hold the cycling interval
 
+// --- VARIABLES GLOBALES PARA ACTUALIZACIONES ---
+let serviceWorkerRegistration;
+let waitingWorker;
+
+
 // --- ENLACES PRINCIPALES DE IMPERDELLANTA ---
 const links = [
     {
@@ -65,6 +70,32 @@ const links = [
 // --- LÓGICA DE LA APLICACIÓN ---
 
 let deferredPrompt;
+
+/**
+ * Muestra la notificación de que hay una nueva versión lista para instalar.
+ * @param {ServiceWorker} worker El nuevo service worker en estado de espera.
+ */
+function showUpdateNotification(worker) {
+    waitingWorker = worker;
+    const updateNotification = document.getElementById('update-notification');
+    if (updateNotification) {
+        updateNotification.classList.remove('hidden');
+    }
+}
+
+/**
+ * Rastrea el estado de un service worker que se está instalando.
+ * @param {ServiceWorker} worker El service worker en instalación.
+ */
+function trackInstallingWorker(worker) {
+    worker.addEventListener('statechange', () => {
+        if (worker.state === 'installed') {
+            // Un nuevo worker se ha instalado y está esperando para activarse.
+            showUpdateNotification(worker);
+        }
+    });
+}
+
 
 /**
  * Renderiza el carrusel de información dinámica con transición de desvanecimiento.
@@ -799,30 +830,7 @@ function updateOnlineStatus() {
 }
 
 /**
- * Muestra una notificación cuando una nueva versión de la app está lista.
- * @param {ServiceWorkerRegistration} registration - El registro del Service Worker.
- */
-function showUpdateNotification(registration) {
-    const notification = document.getElementById('update-notification');
-    const updateButton = document.getElementById('update-now-btn');
-
-    if (!notification || !updateButton) return;
-    
-    notification.classList.remove('hidden'); // Make it display:flex first
-    setTimeout(() => notification.classList.add('show'), 10); // Then trigger transition
-
-    updateButton.addEventListener('click', () => {
-        // Send a message to the waiting service worker to activate.
-        if (registration.waiting) {
-            registration.waiting.postMessage({ type: 'SKIP_WAITING' });
-        }
-        notification.classList.remove('show');
-    });
-}
-
-
-/**
- * Registra el Service Worker para la funcionalidad PWA y offline.
+ * Registra el Service Worker y gestiona el ciclo de vida de las actualizaciones.
  */
 function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
@@ -830,28 +838,31 @@ function registerServiceWorker() {
             navigator.serviceWorker.register('sw.js')
                 .then(registration => {
                     console.log('ServiceWorker registrado con éxito:', registration.scope);
+                    serviceWorkerRegistration = registration;
 
-                    //
-                    // Lógica para detectar y notificar actualizaciones
-                    //
+                    // Comprobar si ya hay un nuevo SW esperando.
+                    if (registration.waiting) {
+                        showUpdateNotification(registration.waiting);
+                    }
+
+                    // Comprobar si se está instalando un nuevo SW.
+                    if (registration.installing) {
+                        trackInstallingWorker(registration.installing);
+                    }
+
+                    // Escuchar por nuevas versiones encontradas.
                     registration.addEventListener('updatefound', () => {
                         console.log('Nueva versión del Service Worker encontrada.');
-                        const newWorker = registration.installing;
-                        newWorker.addEventListener('statechange', () => {
-                            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                                // Nueva versión lista para ser activada.
-                                console.log('Nueva versión instalada y esperando para activar.');
-                                showUpdateNotification(registration);
-                            }
-                        });
+                        if (registration.installing) {
+                            trackInstallingWorker(registration.installing);
+                        }
                     });
                 })
                 .catch(error => {
                     console.log('Fallo en el registro de ServiceWorker:', error);
                 });
 
-            // Este evento se dispara cuando el service worker que controla la página cambia.
-            // Es el momento perfecto para recargar y obtener el nuevo contenido.
+            // Recargar la página cuando un nuevo SW toma el control.
             let refreshing;
             navigator.serviceWorker.addEventListener('controllerchange', () => {
                 if (refreshing) return;
@@ -862,6 +873,7 @@ function registerServiceWorker() {
         });
     }
 }
+
 
 /**
  * Configura y maneja los eventos del modal del chatbot.
@@ -931,6 +943,41 @@ async function initializeApp() {
     document.getElementById('diagnostic-btn').addEventListener('click', () => handleInternalLink('#diagnostic'));
     document.getElementById('calculator-form').addEventListener('submit', handleCalculate);
     document.getElementById('back-button-calc').addEventListener('click', () => showView('links-container'));
+
+    // Listeners para la funcionalidad de actualización
+    const updateApplyBtn = document.getElementById('update-apply-btn');
+    if (updateApplyBtn) {
+        updateApplyBtn.addEventListener('click', () => {
+            if (waitingWorker) {
+                updateApplyBtn.textContent = 'Actualizando...';
+                waitingWorker.postMessage({ type: 'SKIP_WAITING' });
+                // El listener 'controllerchange' se encargará de recargar la página
+            }
+        });
+    }
+
+    const updateCheckBtn = document.getElementById('update-check-btn');
+    if (updateCheckBtn) {
+        updateCheckBtn.addEventListener('click', () => {
+            if (!serviceWorkerRegistration) {
+                alert('El control de actualizaciones aún no está listo. Intenta de nuevo en unos segundos.');
+                return;
+            }
+            
+            updateCheckBtn.disabled = true;
+            updateCheckBtn.textContent = 'Buscando...';
+
+            serviceWorkerRegistration.update().then(() => {
+                alert('Intento de actualización realizado. Si hay una nueva versión, aparecerá un aviso para instalarla.');
+            }).catch(error => {
+                console.error('Error al buscar actualizaciones:', error);
+                alert('No se pudo buscar actualizaciones. Verifica tu conexión a internet.');
+            }).finally(() => {
+                updateCheckBtn.disabled = false;
+                updateCheckBtn.textContent = 'Buscar actualizaciones';
+            });
+        });
+    }
 
 
     showView('links-container');
