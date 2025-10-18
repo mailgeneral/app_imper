@@ -857,31 +857,24 @@ function setupChatbotModal() {
 }
 
 /**
- * Configura el botón de actualización forzada.
- */
-function setupUpdateFab() {
-    const updateFab = document.getElementById('update-fab');
-    if (!updateFab) return;
-
-    updateFab.addEventListener('click', () => {
-        // El parámetro 'true' fuerza la recarga desde el servidor,
-        // saltándose la caché del navegador (hard refresh).
-        window.location.reload(true);
-    });
-}
-
-
-/**
  * Función principal asíncrona para inicializar la aplicación.
  */
 async function initializeApp() {
+    // Lógica de actualización automática y silenciosa
+    const hasReloaded = sessionStorage.getItem('appReloaded');
+    if (!hasReloaded && navigator.onLine) {
+        sessionStorage.setItem('appReloaded', 'true');
+        // El parámetro 'true' fuerza una recarga desde el servidor (hard refresh)
+        window.location.reload(true);
+        return; // Detiene la ejecución para permitir la recarga
+    }
+
     renderProfile();
     renderLinks();
     registerServiceWorker();
     setupInstallButton();
     setupIosInstallPrompt();
     setupChatbotModal();
-    setupUpdateFab();
     
     updateOnlineStatus();
     window.addEventListener('online', updateOnlineStatus);

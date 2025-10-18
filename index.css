@@ -971,32 +971,3 @@ footer {
     height: 100%;
     border: none;
 }
-
-/* Update FAB styles */
-#update-fab {
-    position: fixed;
-    bottom: 2rem;
-    left: 2rem;
-    background-color: var(--error-color);
-    color: white;
-    border-radius: 50px;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 12px var(--shadow-color);
-    cursor: pointer;
-    z-index: 998; /* Below chat fab modal, above content */
-    transition: transform 0.2s ease-in-out, background-color 0.2s ease;
-    font-family: 'Poppins', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    padding: 0.6rem 1.2rem;
-    -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
-}
-
-#update-fab:hover, #update-fab:focus {
-    transform: scale(1.05);
-    background-color: #a72f1c; /* Darker red */
-    outline: none;
-}
