@@ -799,6 +799,29 @@ function updateOnlineStatus() {
 }
 
 /**
+ * Muestra una notificación cuando una nueva versión de la app está lista.
+ * @param {ServiceWorkerRegistration} registration - El registro del Service Worker.
+ */
+function showUpdateNotification(registration) {
+    const notification = document.getElementById('update-notification');
+    const updateButton = document.getElementById('update-now-btn');
+
+    if (!notification || !updateButton) return;
+    
+    notification.classList.remove('hidden'); // Make it display:flex first
+    setTimeout(() => notification.classList.add('show'), 10); // Then trigger transition
+
+    updateButton.addEventListener('click', () => {
+        // Send a message to the waiting service worker to activate.
+        if (registration.waiting) {
+            registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+        }
+        notification.classList.remove('show');
+    });
+}
+
+
+/**
  * Registra el Service Worker para la funcionalidad PWA y offline.
  */
 function registerServiceWorker() {
@@ -807,8 +830,21 @@ function registerServiceWorker() {
             navigator.serviceWorker.register('sw.js')
                 .then(registration => {
                     console.log('ServiceWorker registrado con éxito:', registration.scope);
-                    // Forzar la comprobación de una actualización en cada carga.
-                    registration.update();
+
+                    //
+                    // Lógica para detectar y notificar actualizaciones
+                    //
+                    registration.addEventListener('updatefound', () => {
+                        console.log('Nueva versión del Service Worker encontrada.');
+                        const newWorker = registration.installing;
+                        newWorker.addEventListener('statechange', () => {
+                            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                // Nueva versión lista para ser activada.
+                                console.log('Nueva versión instalada y esperando para activar.');
+                                showUpdateNotification(registration);
+                            }
+                        });
+                    });
                 })
                 .catch(error => {
                     console.log('Fallo en el registro de ServiceWorker:', error);
@@ -816,9 +852,12 @@ function registerServiceWorker() {
 
             // Este evento se dispara cuando el service worker que controla la página cambia.
             // Es el momento perfecto para recargar y obtener el nuevo contenido.
+            let refreshing;
             navigator.serviceWorker.addEventListener('controllerchange', () => {
+                if (refreshing) return;
                 console.log('Nuevo Service Worker activado. Recargando página...');
                 window.location.reload();
+                refreshing = true;
             });
         });
     }

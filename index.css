@@ -971,3 +971,40 @@ footer {
     height: 100%;
     border: none;
 }
+
+/* Update Notification Styles */
+#update-notification {
+    position: fixed;
+    bottom: -100px; /* Initially off-screen */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333; /* Darker than surface */
+    color: var(--primary-text-color);
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    z-index: 1002;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: bottom 0.5s ease-in-out;
+}
+
+#update-notification.show {
+    bottom: 6.5rem; /* Position it above the chat FAB */
+}
+
+#update-now-btn {
+    background-color: var(--accent-color);
+    color: var(--background-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#update-now-btn:hover {
+    background-color: #8BC34A;
+}
