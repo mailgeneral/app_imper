@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "ultima_actualizacion": "2024-10-27T10:00:00Z",
+  "ultima_actualizacion": "2024-11-11T10:00:00Z",
   "moneda": "MXN",
   "productos": [
     {
@@ -9,7 +9,7 @@
       "precio_lista": 899,
       "precio_venta": 809,
       "promocion_activa": true,
-      "descripcion_oferta": "¡Aprovecha nuestro descuento por Apertura de Nuevo Local! Válido hasta el 31 de octubre."
+      "descripcion_oferta": "¡Aprovecha nuestro descuento del BUEN MES! Vigente del 1 al 30 de Noviembre."
     },
     {
       "sku": "IDL7-19L",
@@ -17,39 +17,39 @@
       "precio_lista": 799,
       "precio_venta": 719,
       "promocion_activa": true,
-      "descripcion_oferta": "¡Aprovecha nuestro descuento por Apertura de Nuevo Local! Válido hasta el 31 de octubre."
+      "descripcion_oferta": "¡Aprovecha nuestro descuento del BUEN MES! Vigente del 1 al 30 de Noviembre."
     },
     {
       "sku": "SELLA-1L",
       "nombre_producto": "SELLADOR SELLAPLUS EX (Garrafa 1L)",
       "precio_lista": 199,
-      "precio_venta": 199,
-      "promocion_activa": false,
-      "descripcion_oferta": ""
+      "precio_venta": 179,
+      "promocion_activa": true,
+      "descripcion_oferta": "¡Aprovecha nuestro descuento del BUEN MES! Vigente del 1 al 30 de Noviembre."
     },
     {
       "sku": "RESAN-1L",
       "nombre_producto": "RESANADOR RS-MAX (Envase 1L)",
       "precio_lista": 199,
-      "precio_venta": 199,
-      "promocion_activa": false,
-      "descripcion_oferta": ""
+      "precio_venta": 179,
+      "promocion_activa": true,
+      "descripcion_oferta": "¡Aprovecha nuestro descuento del BUEN MES! Vigente del 1 al 30 de Noviembre."
     },
     {
       "sku": "PINLIDER-19L",
       "nombre_producto": "PINTURA LIDERPINT (Cubeta 19L)",
-      "precio_lista": 747,
-      "precio_venta": 747,
-      "promocion_activa": false,
-      "descripcion_oferta": ""
+      "precio_lista": 750,
+      "precio_venta": 675,
+      "promocion_activa": true,
+      "descripcion_oferta": "¡Aprovecha nuestro descuento del BUEN MES! Vigente del 1 al 30 de Noviembre."
     },
     {
       "sku": "PINOLY-19L",
       "nombre_producto": "PINTURA OLYMPUS 300 (Cubeta 19L)",
       "precio_lista": 1780,
-      "precio_venta": 1780,
-      "promocion_activa": false,
-      "descripcion_oferta": ""
+      "precio_venta": 1602,
+      "promocion_activa": true,
+      "descripcion_oferta": "¡Aprovecha nuestro descuento del BUEN MES! Vigente del 1 al 30 de Noviembre."
     }
   ]
 }
